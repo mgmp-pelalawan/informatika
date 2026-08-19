@@ -6,741 +6,609 @@
     <title>MGMP Informatika Rayon 1 - Kabupaten Pelalawan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.0/index.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1e3a5f',
+                        primary:   '#0f2942',
                         secondary: '#0d9488',
-                        accent: '#f59e0b',
-                        dark: '#0f172a',
-                        light: '#f8fafc'
+                        accent:    '#f59e0b',
+                        dark:      '#060f1e',
                     },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif']
-                    }
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        * { scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #1e3a5f 0%, #0d9488 100%); }
-        .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
-        .card-hover { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
-        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
-        .nav-link { position: relative; }
-        .nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#0d9488; transition:width 0.3s; }
-        .nav-link:hover::after { width:100%; }
-        .tab-active { background: linear-gradient(135deg, #1e3a5f, #0d9488); color: white; }
-        .pulse-dot { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-        .hero-pattern { background-image: radial-gradient(circle at 20% 50%, rgba(13,148,136,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(245,158,11,0.1) 0%, transparent 50%); }
-        .member-card-shine { position: relative; overflow: hidden; }
-        .member-card-shine::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transition: left 0.6s; }
-        .member-card-shine:hover::before { left:100%; }
-        .floating { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-        ::-webkit-scrollbar { width:8px; }
-        ::-webkit-scrollbar-track { background:#f1f5f9; }
-        ::-webkit-scrollbar-thumb { background:linear-gradient(#1e3a5f,#0d9488); border-radius:4px; }
-        .chairman-card { background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%); border: 2px solid #f59e0b; }
-        .vice-chairman-card { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border: 2px solid #0d9488; }
-        .secretary-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; }
-        .treasurer-card { background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); border: 2px solid #a855f7; }
-        .badge-bk { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
-        .badge-ld { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
-        .semester-card-1 { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 4px solid #f59e0b; }
-        .semester-card-2 { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left: 4px solid #3b82f6; }
-        .kelas-tab-active { background: white; color: #1e3a5f; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(#0f2942, #0d9488); border-radius: 3px; }
+
+        .grad-primary { background: linear-gradient(135deg, #0f2942 0%, #0d9488 100%); }
+        .grad-accent  { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
+        .grad-cyan    { background: linear-gradient(135deg, #06b6d4 0%, #0d9488 100%); }
+        .text-grad-gold { background: linear-gradient(135deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        #navbar { transition: all .35s ease; }
+        #navbar.scrolled { background: rgba(255,255,255,.96) !important; backdrop-filter: blur(20px); box-shadow: 0 2px 24px rgba(0,0,0,.08); }
+        .nav-item { position: relative; font-weight: 600; font-size: .875rem; transition: color .25s; text-decoration: none; }
+        .nav-item::after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2.5px; border-radius:2px; background: linear-gradient(90deg,#0d9488,#06b6d4); transition: width .3s ease; }
+        .nav-item:hover::after, .nav-item.active::after { width:100%; }
+
+        .hero-bg {
+            background:
+                radial-gradient(ellipse at 20% 60%, rgba(13,148,136,.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 10%, rgba(6,182,212,.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(245,158,11,.1) 0%, transparent 40%),
+                linear-gradient(160deg, #060f1e 0%, #0f2942 50%, #0a1f38 100%);
+        }
+        .hero-grid { background-image: linear-gradient(rgba(13,148,136,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(13,148,136,.07) 1px, transparent 1px); background-size: 60px 60px; }
+
+        .particle { position:absolute; border-radius:50%; animation: floatP linear infinite; }
+        @keyframes floatP { 0%{transform:translateY(100vh) rotate(0deg);opacity:0} 10%{opacity:.5} 90%{opacity:.3} 100%{transform:translateY(-100px) rotate(720deg);opacity:0} }
+
+        .glass-dark { background: rgba(255,255,255,.06); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.1); }
+
+        .section-label { display:inline-flex; align-items:center; gap:8px; padding:6px 16px; border-radius:99px; background:rgba(13,148,136,.1); border:1px solid rgba(13,148,136,.25); font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#0d9488; }
+
+        .card { background:#fff; border-radius:20px; transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s; }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -8px rgba(0,0,0,.14); }
+        .card-glow { transition: transform .35s, box-shadow .35s; }
+        .card-glow:hover { transform: translateY(-6px); box-shadow: 0 20px 48px -10px rgba(13,148,136,.3); }
+
+        .stat-num { font-size: 2.5rem; font-weight:900; line-height:1; }
+
+        .pulse-ring { animation: pulseRing 2s ease-out infinite; }
+        @keyframes pulseRing { 0%{box-shadow:0 0 0 0 rgba(16,185,129,.6)} 70%{box-shadow:0 0 0 10px rgba(16,185,129,0)} 100%{box-shadow:0 0 0 0 rgba(16,185,129,0)} }
+
+        .float1 { animation: float1 7s ease-in-out infinite; }
+        .float2 { animation: float1 9s ease-in-out infinite reverse; }
+        .float3 { animation: float1 5.5s ease-in-out infinite 1s; }
+        @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+
+        .shine { position:relative; overflow:hidden; }
+        .shine::after { content:''; position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.18) 50%, transparent 60%); transform:translateX(-100%); transition: transform .7s ease; pointer-events:none; }
+        .shine:hover::after { transform:translateX(100%); }
+
+        .org-card { background:white; border-radius:18px; padding:20px 18px; text-align:center; transition:all .35s ease; }
+        .org-card:hover { transform:translateY(-5px); box-shadow: 0 16px 40px -8px rgba(13,148,136,.2); }
+        .org-card-ketua { border-top:4px solid #f59e0b; }
+        .org-card-wakil { border-top:4px solid #0d9488; }
+        .org-card-sek   { border-top:4px solid #3b82f6; }
+        .org-card-ben   { border-top:4px solid #a855f7; }
+        .org-avatar { width:64px; height:64px; border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:#fff; }
+        .org-badge { position:absolute; top:-10px; left:50%; transform:translateX(-50%); padding:3px 14px; border-radius:99px; font-size:.65rem; font-weight:800; letter-spacing:.06em; white-space:nowrap; border:2px solid #fff; }
+
+        .atp-tab { padding:10px 22px; border-radius:12px; font-weight:700; font-size:.875rem; cursor:pointer; transition:all .3s; color:#6b7280; background:transparent; border:none; }
+        .atp-tab.active { color:#fff; background:linear-gradient(135deg,#0f2942,#0d9488); box-shadow:0 8px 20px -4px rgba(13,148,136,.4); }
+
+        .tp-item { background:#fff; border-radius:14px; padding:14px 16px; display:flex; align-items:flex-start; gap:12px; transition:all .3s; border:1px solid #f1f5f9; }
+        .tp-item:hover { border-color:#0d9488; box-shadow:0 6px 20px -4px rgba(13,148,136,.15); transform:translateX(4px); }
+        .badge-bk { background:#dbeafe; color:#1e40af; border:1.5px solid #93c5fd; }
+        .badge-ld { background:#f3e8ff; color:#6b21a8; border:1.5px solid #d8b4fe; }
+
+        .member-card { background:#fff; border-radius:16px; padding:18px 14px; text-align:center; transition:all .3s; border:1.5px solid #f1f5f9; }
+        .member-card:hover { border-color:#0d9488; transform:translateY(-5px); box-shadow:0 12px 32px -6px rgba(13,148,136,.18); }
+
+        .acc-body { overflow:hidden; transition:max-height .4s ease, opacity .3s; max-height:0; opacity:0; }
+        .acc-body.open { max-height:1500px; opacity:1; }
+        .acc-arrow { transition:transform .35s; display:inline-block; }
+        .acc-open .acc-arrow { transform:rotate(180deg); }
+
+        .footer-link { color:#9ca3af; font-size:.875rem; transition:color .2s; text-decoration:none; display:block; }
+        .footer-link:hover { color:#0d9488; }
+
+        #btt { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; position:fixed; bottom:24px; right:24px; z-index:50; background:linear-gradient(135deg,#0f2942,#0d9488); color:#fff; box-shadow:0 8px 24px rgba(13,148,136,.4); cursor:pointer; transition:all .3s; opacity:0; pointer-events:none; border:none; }
+        #btt.show { opacity:1; pointer-events:auto; }
+        #btt:hover { transform:scale(1.1) translateY(-2px); }
+
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+        .anim-up    { animation: fadeInUp    .8s ease both; }
+        .anim-right { animation: fadeInRight .8s ease both; }
+        .delay-1 { animation-delay:.15s; }
+        .delay-2 { animation-delay:.3s; }
+        .delay-3 { animation-delay:.45s; }
+
+        .reveal { opacity:0; transform:translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity:1; transform:none; }
     </style>
 </head>
-<body class="bg-light text-gray-800">
+<body>
 
-    <!-- Navbar -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-lg shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-lg">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <div>
-                        <div class="font-bold text-primary text-sm leading-tight">MGMP Informatika</div>
-                        <div class="text-xs text-gray-500">Rayon 1 - Kab. Pelalawan</div>
-                    </div>
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-3" style="background:transparent;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+            <a href="#beranda" class="flex items-center gap-3" style="text-decoration:none;">
+                <div class="w-10 h-10 rounded-xl grad-primary flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-laptop-code text-base"></i>
                 </div>
-                <div class="hidden md:flex items-center gap-6">
-                    <a href="#beranda" class="nav-link text-sm font-medium text-gray-700 hover:text-secondary">Beranda</a>
-                    <a href="#tentang" class="nav-link text-sm font-medium text-gray-700 hover:text-secondary">Tentang</a>
-                    <a href="#struktur" class="nav-link text-sm font-medium text-gray-700 hover:text-secondary">Struktur</a>
-                    <a href="#atp" class="nav-link text-sm font-medium text-gray-700 hover:text-secondary">ATP</a>
-                    <a href="#kontak" class="nav-link text-sm font-medium text-gray-700 hover:text-secondary">Kontak</a>
+                <div>
+                    <div class="font-bold text-sm leading-tight" id="brand-title" style="color:#fff">MGMP Informatika</div>
+                    <div class="text-xs" id="brand-sub" style="color:rgba(255,255,255,.6)">Rayon 1 &mdash; Kab. Pelalawan</div>
                 </div>
-                <button id="menuBtn" class="md:hidden text-gray-700 text-xl"><i class="fas fa-bars"></i></button>
+            </a>
+            <div class="hidden md:flex items-center gap-7">
+                <a href="#beranda"  class="nav-item active" id="n-beranda"  style="color:#fff">Beranda</a>
+                <a href="#tentang"  class="nav-item" id="n-tentang"         style="color:#fff">Tentang</a>
+                <a href="#struktur" class="nav-item" id="n-struktur"        style="color:#fff">Struktur</a>
+                <a href="#atp"      class="nav-item" id="n-atp"             style="color:#fff">ATP</a>
+                <a href="#kontak"   class="nav-item" id="n-kontak"          style="color:#fff">Kontak</a>
             </div>
+            <button id="mobBtn" class="md:hidden w-9 h-9 rounded-lg glass-dark flex items-center justify-center text-white text-lg">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
-            <div class="px-4 py-3 space-y-2">
-                <a href="#beranda" class="block py-2 text-sm font-medium text-gray-700">Beranda</a>
-                <a href="#tentang" class="block py-2 text-sm font-medium text-gray-700">Tentang</a>
-                <a href="#struktur" class="block py-2 text-sm font-medium text-gray-700">Struktur</a>
-                <a href="#atp" class="block py-2 text-sm font-medium text-gray-700">ATP</a>
-                <a href="#kontak" class="block py-2 text-sm font-medium text-gray-700">Kontak</a>
-            </div>
+    </div>
+    <div id="mobMenu" class="hidden md:hidden mt-3 mx-4 rounded-2xl overflow-hidden" style="background:rgba(6,15,30,.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1)">
+        <div class="flex flex-col py-2">
+            <a href="#beranda"  class="px-5 py-3 font-semibold text-sm hover:bg-white/5 transition" style="color:rgba(255,255,255,.8);text-decoration:none">Beranda</a>
+            <a href="#tentang"  class="px-5 py-3 font-semibold text-sm hover:bg-white/5 transition" style="color:rgba(255,255,255,.8);text-decoration:none">Tentang</a>
+            <a href="#struktur" class="px-5 py-3 font-semibold text-sm hover:bg-white/5 transition" style="color:rgba(255,255,255,.8);text-decoration:none">Struktur</a>
+            <a href="#atp"      class="px-5 py-3 font-semibold text-sm hover:bg-white/5 transition" style="color:rgba(255,255,255,.8);text-decoration:none">ATP</a>
+            <a href="#kontak"   class="px-5 py-3 font-semibold text-sm hover:bg-white/5 transition" style="color:rgba(255,255,255,.8);text-decoration:none">Kontak</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section id="beranda" class="relative min-h-screen flex items-center pt-16 overflow-hidden hero-pattern">
-        <div class="absolute inset-0">
-            <img src="https://image.qwenlm.ai/public_source/6f3a9362-7623-4ef1-8e8f-a0a24976625e/1df040c94-439a-43d1-8584-1aa972742112.png" alt="banner" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90"></div>
-        </div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-white text-sm mb-6">
-                        <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
-                        Musyawarah Guru Mata Pelajaran
-                    </div>
-                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
-                        MGMP <span class="text-accent">Informatika</span><br>
-                        Rayon 1
-                    </h1>
-                    <p class="text-lg text-white/80 mb-4 font-medium">Kabupaten Pelalawan, Riau</p>
-                    <p class="text-white/70 mb-8 leading-relaxed">
-                        Wadah kolaborasi guru Informatika SMP/MTs se-Rayon 1 Kabupaten Pelalawan untuk meningkatkan kualitas pembelajaran, berbagi praktik baik, dan mengembangkan kompetensi digital peserta didik sesuai Kurikulum Merdeka.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#atp" class="px-6 py-3 bg-accent hover:bg-amber-600 text-white font-semibold rounded-lg transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
-                            <i class="fas fa-book-open"></i> Lihat ATP
-                        </a>
-                        <a href="#struktur" class="px-6 py-3 glass text-white font-semibold rounded-lg hover:bg-white/20 transition-all flex items-center gap-2">
-                            <i class="fas fa-users"></i> Struktur Organisasi
-                        </a>
-                    </div>
-                </div>
-                <div data-aos="fade-left" class="hidden md:block">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="glass rounded-2xl p-6 floating" style="animation-delay:0s">
-                            <i class="fas fa-chalkboard-teacher text-3xl text-accent mb-3"></i>
-                            <div class="text-3xl font-bold text-white">12</div>
-                            <div class="text-white/70 text-sm">Guru Aktif</div>
-                        </div>
-                        <div class="glass rounded-2xl p-6 floating" style="animation-delay:1s">
-                            <i class="fas fa-school text-3xl text-secondary mb-3"></i>
-                            <div class="text-3xl font-bold text-white">11</div>
-                            <div class="text-white/70 text-sm">SMP/MTs</div>
-                        </div>
-                        <div class="glass rounded-2xl p-6 floating" style="animation-delay:2s">
-                            <i class="fas fa-calendar-check text-3xl text-accent mb-3"></i>
-                            <div class="text-3xl font-bold text-white">24</div>
-                            <div class="text-white/70 text-sm">Kegiatan/Tahun</div>
-                        </div>
-                        <div class="glass rounded-2xl p-6 floating" style="animation-delay:3s">
-                            <i class="fas fa-award text-3xl text-secondary mb-3"></i>
-                            <div class="text-3xl font-bold text-white">Fase D</div>
-                            <div class="text-white/70 text-sm">SMP/MTs</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl"></i>
-        </div>
-    </section>
+<!-- HERO -->
+<section id="beranda" class="relative min-h-screen flex items-center overflow-hidden hero-bg">
+    <div class="absolute inset-0 hero-grid opacity-40"></div>
+    <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full float1" style="background:radial-gradient(circle,rgba(13,148,136,.2),transparent 70%);filter:blur(60px);"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full float2" style="background:radial-gradient(circle,rgba(6,182,212,.15),transparent 70%);filter:blur(60px);"></div>
 
-    <!-- Tentang Section -->
-    <section id="tentang" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Tentang Kami</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2 mb-4">Mengenal MGMP Informatika Rayon 1</h2>
-                <div class="w-20 h-1 gradient-bg mx-auto rounded-full"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 w-full">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-dark text-xs font-semibold mb-8 anim-up" style="color:rgba(255,255,255,.9)">
+                    <span class="w-2 h-2 bg-emerald-400 rounded-full pulse-ring flex-shrink-0"></span>
+                    Musyawarah Guru Mata Pelajaran &middot; Aktif 2026/2027
+                </div>
+                <h1 class="font-black text-white leading-tight mb-6 anim-up delay-1" style="font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.05">
+                    MGMP<br>
+                    <span class="text-grad-gold">Informatika</span><br>
+                    <span style="font-size:.65em;font-weight:700;color:rgba(255,255,255,.7)">Rayon 1 Pelalawan</span>
+                </h1>
+                <p class="text-base leading-relaxed mb-10 max-w-md anim-up delay-2" style="color:rgba(255,255,255,.6)">
+                    Wadah kolaborasi guru Informatika SMP/MTs se-Rayon 1 Kabupaten Pelalawan &mdash; mengembangkan kompetensi digital, berbagi praktik baik, dan mewujudkan pembelajaran bermutu sesuai <strong style="color:rgba(255,255,255,.85)">Kurikulum Merdeka</strong>.
+                </p>
+                <div class="flex flex-wrap gap-4 anim-up delay-3">
+                    <a href="#atp" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm grad-accent shadow-lg hover:shadow-xl hover:scale-105 transition-all" style="color:#060f1e;text-decoration:none">
+                        <i class="fas fa-book-open"></i> Lihat ATP
+                    </a>
+                    <a href="#struktur" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm glass-dark transition-all" style="color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.2)">
+                        <i class="fas fa-users"></i> Struktur Organisasi
+                    </a>
+                </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="card-hover bg-white rounded-2xl p-8 shadow-md border border-gray-100" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
-                        <i class="fas fa-bullseye text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-3">Visi</h3>
-                    <p class="text-gray-600 leading-relaxed">Terwujudnya guru Informatika yang profesional, kolaboratif, dan inovatif dalam menyelenggarakan pembelajaran bermutu di Kabupaten Pelalawan.</p>
+            <div class="hidden md:grid grid-cols-2 gap-5 anim-right delay-2">
+                <div class="glass-dark rounded-3xl p-7 float1 shine">
+                    <div class="w-11 h-11 rounded-xl grad-cyan flex items-center justify-center text-white mb-4 shadow-md"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="stat-num text-white">12</div>
+                    <div class="text-sm mt-1 font-medium" style="color:rgba(255,255,255,.5)">Guru Aktif</div>
                 </div>
-                <div class="card-hover bg-white rounded-2xl p-8 shadow-md border border-gray-100" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 rounded-xl bg-teal-50 flex items-center justify-center mb-5">
-                        <i class="fas fa-rocket text-2xl text-secondary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-3">Misi</h3>
-                    <ul class="text-gray-600 space-y-2 text-sm">
-                        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Meningkatkan kompetensi pedagogik dan profesional guru</li>
-                        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Mengembangkan perangkat ajar berbasis Kurikulum Merdeka</li>
-                        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Berbagi praktik baik pembelajaran Informatika</li>
-                    </ul>
+                <div class="glass-dark rounded-3xl p-7 float2 shine">
+                    <div class="w-11 h-11 rounded-xl grad-accent flex items-center justify-center mb-4 shadow-md" style="color:#060f1e"><i class="fas fa-school"></i></div>
+                    <div class="stat-num text-white">11</div>
+                    <div class="text-sm mt-1 font-medium" style="color:rgba(255,255,255,.5)">SMP / MTs</div>
                 </div>
-                <div class="card-hover bg-white rounded-2xl p-8 shadow-md border border-gray-100" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center mb-5">
-                        <i class="fas fa-handshake text-2xl text-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-3">Program Kerja</h3>
-                    <ul class="text-gray-600 space-y-2 text-sm">
-                        <li class="flex gap-2"><i class="fas fa-star text-accent mt-1"></i> Workshop & pelatihan guru</li>
-                        <li class="flex gap-2"><i class="fas fa-star text-accent mt-1"></i> Pengembangan ATP & Modul Ajar</li>
-                        <li class="flex gap-2"><i class="fas fa-star text-accent mt-1"></i> Forum diskusi & sharing session</li>
-                        <li class="flex gap-2"><i class="fas fa-star text-accent mt-1"></i> Lomba & kompetisi siswa</li>
-                    </ul>
+                <div class="glass-dark rounded-3xl p-7 float3 shine">
+                    <div class="w-11 h-11 rounded-xl grad-primary flex items-center justify-center text-white mb-4 shadow-md"><i class="fas fa-calendar-check"></i></div>
+                    <div class="stat-num text-white">24</div>
+                    <div class="text-sm mt-1 font-medium" style="color:rgba(255,255,255,.5)">Kegiatan / Tahun</div>
+                </div>
+                <div class="glass-dark rounded-3xl p-7 float1 shine" style="animation-delay:2.5s">
+                    <div class="w-11 h-11 rounded-xl flex items-center justify-center text-white mb-4 shadow-md" style="background:linear-gradient(135deg,#8b5cf6,#a855f7)"><i class="fas fa-award"></i></div>
+                    <div class="stat-num text-white">Fase D</div>
+                    <div class="text-sm mt-1 font-medium" style="color:rgba(255,255,255,.5)">SMP / MTs</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <a href="#tentang" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all" style="color:rgba(255,255,255,.4);text-decoration:none">
+        <span class="text-xs font-semibold tracking-widest uppercase">Scroll</span>
+        <div class="w-5 h-9 rounded-full flex justify-center pt-1.5" style="border:2px solid rgba(255,255,255,.2)">
+            <div class="w-1 h-2 rounded-full animate-bounce" style="background:rgba(255,255,255,.5)"></div>
+        </div>
+    </a>
+</section>
 
-    <!-- Struktur Organisasi -->
-    <section id="struktur" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Struktur Organisasi</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2 mb-4">Pengurus MGMP Informatika Rayon 1</h2>
-                <div class="w-20 h-1 gradient-bg mx-auto rounded-full"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Periode Tahun Ajaran <strong>2026/2027</strong> — Musyawarah Guru Mata Pelajaran Informatika Kabupaten Pelalawan</p>
+<!-- TENTANG -->
+<section id="tentang" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="section-label mb-4"><i class="fas fa-info-circle"></i> Tentang Kami</div>
+            <h2 class="text-4xl md:text-5xl font-black text-primary mb-4">Mengenal MGMP Informatika</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">Rayon 1 Kabupaten Pelalawan, Riau</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="card p-8 shadow-md border border-gray-100 reveal">
+                <div class="w-14 h-14 rounded-2xl grad-primary flex items-center justify-center text-white text-xl mb-6 shadow-lg"><i class="fas fa-bullseye"></i></div>
+                <h3 class="text-xl font-bold text-primary mb-3">Visi</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Terwujudnya guru Informatika yang profesional, kolaboratif, dan inovatif dalam menyelenggarakan pembelajaran bermutu di Kabupaten Pelalawan.</p>
             </div>
+            <div class="card p-8 shadow-md border border-gray-100 reveal">
+                <div class="w-14 h-14 rounded-2xl grad-cyan flex items-center justify-center text-white text-xl mb-6 shadow-lg"><i class="fas fa-rocket"></i></div>
+                <h3 class="text-xl font-bold text-primary mb-4">Misi</h3>
+                <ul class="space-y-3 text-sm text-gray-500">
+                    <li class="flex items-start gap-2.5"><i class="fas fa-check-circle text-secondary mt-0.5 flex-shrink-0"></i> Meningkatkan kompetensi pedagogik dan profesional guru</li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-check-circle text-secondary mt-0.5 flex-shrink-0"></i> Mengembangkan perangkat ajar berbasis Kurikulum Merdeka</li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-check-circle text-secondary mt-0.5 flex-shrink-0"></i> Berbagi praktik baik pembelajaran Informatika</li>
+                </ul>
+            </div>
+            <div class="card p-8 shadow-md border border-gray-100 reveal">
+                <div class="w-14 h-14 rounded-2xl grad-accent flex items-center justify-center text-dark text-xl mb-6 shadow-lg"><i class="fas fa-handshake"></i></div>
+                <h3 class="text-xl font-bold text-primary mb-4">Program Kerja</h3>
+                <ul class="space-y-3 text-sm text-gray-500">
+                    <li class="flex items-start gap-2.5"><i class="fas fa-star text-accent mt-0.5 flex-shrink-0"></i> Workshop &amp; pelatihan guru</li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-star text-accent mt-0.5 flex-shrink-0"></i> Pengembangan ATP &amp; Modul Ajar</li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-star text-accent mt-0.5 flex-shrink-0"></i> Forum diskusi &amp; sharing session</li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-star text-accent mt-0.5 flex-shrink-0"></i> Lomba &amp; kompetisi siswa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Ketua -->
-            <div class="max-w-md mx-auto mb-10" data-aos="zoom-in">
-                <div class="chairman-card member-card-shine rounded-2xl p-8 shadow-xl text-center relative pt-10">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-accent text-white text-xs font-bold rounded-full shadow-lg">
-                        <i class="fas fa-crown mr-1"></i> KETUA
-                    </div>
-                    <div class="w-28 h-28 mx-auto rounded-full gradient-bg flex items-center justify-center text-white text-4xl font-bold mb-4 shadow-lg ring-4 ring-accent/30">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary">Veri Usdi, S.E.</h3>
-                    <p class="text-sm text-gray-600 mt-2 font-medium"><i class="fas fa-school text-accent mr-1"></i> SMPN 2 Pangkalan Kerinci</p>
-                    <div class="flex justify-center gap-3 mt-5">
-                        <a href="#" class="w-9 h-9 rounded-full bg-white/80 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition shadow-sm"><i class="fab fa-whatsapp text-sm"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-white/80 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition shadow-sm"><i class="fas fa-envelope text-sm"></i></a>
+<!-- STRUKTUR -->
+<section id="struktur" class="py-24" style="background:linear-gradient(160deg,#f0f7ff 0%,#e8f5f3 100%)">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="section-label mb-4"><i class="fas fa-sitemap"></i> Struktur Organisasi</div>
+            <h2 class="text-4xl md:text-5xl font-black text-primary mb-4">Pengurus MGMP Rayon 1</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">Periode Tahun Ajaran <strong>2026/2027</strong> &mdash; MGMP Informatika Kabupaten Pelalawan</p>
+        </div>
+
+        <!-- Ketua -->
+        <div class="flex justify-center reveal">
+            <div class="relative pt-3 w-72">
+                <div class="org-badge" style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;box-shadow:0 4px 12px rgba(245,158,11,.4)">
+                    <i class="fas fa-crown mr-1"></i> KETUA
+                </div>
+                <div class="org-card org-card-ketua shine shadow-xl mt-3">
+                    <div class="org-avatar grad-primary shadow-lg"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="font-bold text-primary text-base">Veri Usdi, S.E.</h3>
+                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school text-amber-500 mr-1"></i> SMPN 2 Pangkalan Kerinci</p>
+                    <div class="flex justify-center gap-2 mt-3">
+                        <a href="#" class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600 hover:bg-green-500 hover:text-white transition text-sm"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-500 hover:text-white transition text-sm"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-8" style="background:linear-gradient(#f59e0b,#0d9488)"></div></div>
 
-            <!-- Wakil Ketua -->
-            <div class="max-w-md mx-auto mb-10" data-aos="zoom-in" data-aos-delay="100">
-                <div class="vice-chairman-card member-card-shine rounded-2xl p-7 shadow-lg text-center relative pt-10">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-secondary text-white text-xs font-bold rounded-full shadow-lg">
-                        <i class="fas fa-star mr-1"></i> WAKIL KETUA
-                    </div>
-                    <div class="w-24 h-24 mx-auto rounded-full bg-secondary flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg ring-4 ring-secondary/30">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary">Andri Fernanda, S.Pd.</h3>
-                    <p class="text-sm text-gray-600 mt-2 font-medium"><i class="fas fa-school text-secondary mr-1"></i> SMPN 1 Bandar Seikijang</p>
+        <!-- Wakil -->
+        <div class="flex justify-center reveal">
+            <div class="relative pt-3 w-64">
+                <div class="org-badge" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.4)">
+                    <i class="fas fa-star mr-1"></i> WAKIL KETUA
+                </div>
+                <div class="org-card org-card-wakil shine shadow-lg mt-3">
+                    <div class="org-avatar" style="background:linear-gradient(135deg,#0d9488,#06b6d4)"><i class="fas fa-user"></i></div>
+                    <h3 class="font-bold text-primary text-base">Andri Fernanda, S.Pd.</h3>
+                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school text-secondary mr-1"></i> SMPN 1 Bandar Seikijang</p>
                 </div>
             </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-8" style="background:linear-gradient(#0d9488,#3b82f6)"></div></div>
 
-            <!-- Sekretaris I, Sekretaris II, Bendahara -->
-            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
-                <div class="secretary-card member-card-shine rounded-2xl p-6 shadow-md text-center relative pt-10">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full shadow-md">SEKRETARIS I</div>
-                    <div class="w-20 h-20 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-white text-2xl font-bold mb-4 shadow-md ring-4 ring-blue-300">
-                        <i class="fas fa-user-pen"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-primary">Rahmi Siahaan</h3>
-                    <p class="text-sm text-gray-600 mt-2 font-medium"><i class="fas fa-school text-blue-500 mr-1"></i> SMPN 1 Pangkalan Kerinci</p>
-                </div>
-                <div class="secretary-card member-card-shine rounded-2xl p-6 shadow-md text-center relative pt-10">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full shadow-md">SEKRETARIS II</div>
-                    <div class="w-20 h-20 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-white text-2xl font-bold mb-4 shadow-md ring-4 ring-blue-300">
-                        <i class="fas fa-user-pen"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-primary">Suci Maisaroh</h3>
-                    <p class="text-sm text-gray-600 mt-2 font-medium"><i class="fas fa-school text-blue-500 mr-1"></i> SMP IT Darul Fikri</p>
-                </div>
-                <div class="treasurer-card member-card-shine rounded-2xl p-6 shadow-md text-center relative pt-10">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-purple-500 text-white text-xs font-bold rounded-full shadow-md">BENDAHARA</div>
-                    <div class="w-20 h-20 mx-auto rounded-full bg-purple-500 flex items-center justify-center text-white text-2xl font-bold mb-4 shadow-md ring-4 ring-purple-300">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-primary">Widia Astuti</h3>
-                    <p class="text-sm text-gray-600 mt-2 font-medium"><i class="fas fa-school text-purple-500 mr-1"></i> SMPN Bernas</p>
+        <!-- Sekretaris & Bendahara -->
+        <div class="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto reveal">
+            <div class="relative pt-4">
+                <div class="org-badge" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;box-shadow:0 4px 12px rgba(59,130,246,.4)">SEKRETARIS I</div>
+                <div class="org-card org-card-sek shine shadow-md mt-3">
+                    <div class="org-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1);width:52px;height:52px;font-size:1.1rem"><i class="fas fa-user-pen"></i></div>
+                    <h3 class="font-bold text-primary text-sm mt-2">Rahmi Siahaan</h3>
+                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school text-blue-500 mr-1"></i> SMPN 1 Pangkalan Kerinci</p>
                 </div>
             </div>
+            <div class="relative pt-4">
+                <div class="org-badge" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;box-shadow:0 4px 12px rgba(59,130,246,.4)">SEKRETARIS II</div>
+                <div class="org-card org-card-sek shine shadow-md mt-3">
+                    <div class="org-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1);width:52px;height:52px;font-size:1.1rem"><i class="fas fa-user-pen"></i></div>
+                    <h3 class="font-bold text-primary text-sm mt-2">Suci Maisaroh</h3>
+                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school text-blue-500 mr-1"></i> SMP IT Darul Fikri</p>
+                </div>
+            </div>
+            <div class="relative pt-4">
+                <div class="org-badge" style="background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;box-shadow:0 4px 12px rgba(168,85,247,.4)">BENDAHARA</div>
+                <div class="org-card org-card-ben shine shadow-md mt-3">
+                    <div class="org-avatar" style="background:linear-gradient(135deg,#a855f7,#ec4899);width:52px;height:52px;font-size:1.1rem"><i class="fas fa-wallet"></i></div>
+                    <h3 class="font-bold text-primary text-sm mt-2">Widia Astuti</h3>
+                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school text-purple-500 mr-1"></i> SMPN Bernas</p>
+                </div>
+            </div>
+        </div>
 
-            <!-- Anggota -->
-            <div class="text-center mb-8 mt-14" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-primary flex items-center justify-center gap-2">
-                    <i class="fas fa-users text-secondary"></i> Anggota
-                </h3>
-                <div class="w-16 h-1 bg-secondary mx-auto rounded-full mt-2"></div>
+        <!-- Anggota -->
+        <div class="mt-16 reveal">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-primary flex items-center justify-center gap-2"><i class="fas fa-users text-secondary"></i> Anggota</h3>
+                <div class="w-14 h-1 grad-cyan mx-auto rounded-full mt-2"></div>
                 <p class="text-sm text-gray-500 mt-3">Guru Informatika SMP/MTs se-Rayon 1 Kabupaten Pelalawan</p>
             </div>
             <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Sarina Gusti</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMPN 4 Langgam</p>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full grad-primary flex items-center justify-center text-white text-xl mb-3 shadow-md"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Sarina Gusti</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMPN 4 Langgam</p></div>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full grad-cyan flex items-center justify-center text-white text-xl mb-3 shadow-md"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Irdawati</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMPN 1 Pangkalan Kerinci</p></div>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center text-white text-xl mb-3 shadow-md" style="background:linear-gradient(135deg,#3b82f6,#6366f1)"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Lanny Novita Safira Hesti, S.Pd.</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMPN 2 Bandar Seikijang</p></div>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center text-white text-xl mb-3 shadow-md" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Nila Ruspita Yulviona, S.Pd.</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMPN 6 Pelalawan</p></div>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center text-white text-xl mb-3 shadow-md" style="background:linear-gradient(135deg,#a855f7,#ec4899)"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Imbran Sinaga, S.T.</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMP Harapan I Kebun Nilo</p></div>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full grad-primary flex items-center justify-center text-white text-xl mb-3 shadow-md"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Lilis Setyowati, S.Kom.</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMPN 4 Pangkalan Kerinci</p></div>
+                <div class="member-card"><div class="w-14 h-14 mx-auto rounded-full grad-cyan flex items-center justify-center text-white text-xl mb-3 shadow-md"><i class="fas fa-user"></i></div><h4 class="font-bold text-primary text-sm">Nanda Nirmawan, S.Pd.</h4><p class="text-xs text-gray-400 mt-1"><i class="fas fa-school mr-1"></i>SMP Plus Taruna Andalan</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ATP -->
+<section id="atp" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 reveal">
+            <div class="section-label mb-4"><i class="fas fa-book-open"></i> Kurikulum Merdeka</div>
+            <h2 class="text-4xl md:text-5xl font-black text-primary mb-4">Alur Tujuan Pembelajaran</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-sm">Mata Pelajaran Informatika &mdash; <strong>Fase D (SMP/MTs)</strong><br>ATP Kesepakatan MGMP Informatika Rayon 1 &middot; TA <strong>2026/2027</strong></p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 mb-8 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-xs font-bold text-blue-700"><span class="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0"></span> Berpikir Komputasional (BK)</div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 border border-purple-200 text-xs font-bold text-purple-700"><span class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0"></span> Literasi Digital (LD)</div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mb-10 p-2 bg-gray-100 rounded-2xl max-w-lg mx-auto reveal">
+            <button onclick="switchKelas('7')" id="tab-7" class="atp-tab flex-1 active"><i class="fas fa-graduation-cap mr-1.5"></i> Kelas VII</button>
+            <button onclick="switchKelas('8')" id="tab-8" class="atp-tab flex-1"><i class="fas fa-graduation-cap mr-1.5"></i> Kelas VIII</button>
+            <button onclick="switchKelas('9')" id="tab-9" class="atp-tab flex-1"><i class="fas fa-graduation-cap mr-1.5"></i> Kelas IX</button>
+        </div>
+
+        <!-- Kelas 7 -->
+        <div id="content-7" class="kelas-pane reveal">
+            <div class="rounded-2xl p-5 mb-8 flex items-center gap-4 border border-blue-100" style="background:linear-gradient(135deg,#eff6ff,#e0f2fe)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-md" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)">VII</div>
+                <div><h3 class="text-lg font-bold text-primary">Kelas VII &mdash; Fase D</h3><p class="text-sm text-gray-500">Pengenalan konsep dasar Informatika</p></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl p-6 border-l-4 border-amber-400 shadow-sm" style="background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+                    <div class="flex items-center gap-3 mb-5"><div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm"><i class="fas fa-sun text-amber-500 text-lg"></i></div><div><div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Semester</div><div class="text-xl font-black text-primary">Ganjil (1)</div></div></div>
+                    <div class="space-y-3">
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-bk flex-shrink-0 flex items-center justify-center font-bold text-xs">1.1</span><p class="text-sm text-gray-700">Memahami konsep himpunan data terstruktur dalam kehidupan sehari-hari</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-bk flex-shrink-0 flex items-center justify-center font-bold text-xs">1.2</span><p class="text-sm text-gray-700">Memahami konsep lembar kerja pengolah data</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.1</span><p class="text-sm text-gray-700">Memahami cara kerja dan penggunaan mesin pencari di internet</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.4</span><p class="text-sm text-gray-700">Membedakan fakta, opini, dan hoaks</p></div>
+                    </div>
                 </div>
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="50">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Irdawati</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMPN 1 Pangkalan Kerinci</p>
-                </div>
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Lanny Novita Safira Hesti, S.Pd.</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMPN 2 Bandar Seikijang</p>
-                </div>
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="150">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Nila Ruspita Yulviona, S.Pd.</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMPN 6 Pelalawan</p>
-                </div>
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Imbran Sinaga, S.T.</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMP Harapan I Kebun Nilo</p>
-                </div>
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="250">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Lilis Setyowati, S.Kom.</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMPN 4 Pangkalan Kerinci</p>
-                </div>
-                <div class="member-card-shine card-hover bg-white rounded-xl p-5 shadow-sm text-center border border-gray-100 hover:border-secondary" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold mb-3"><i class="fas fa-user"></i></div>
-                    <h4 class="font-bold text-primary text-sm">Nanda Nirmawan, S.Pd.</h4>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-school mr-1"></i>SMP Plus Taruna Andalan</p>
+                <div class="rounded-2xl p-6 border-l-4 border-blue-400 shadow-sm" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+                    <div class="flex items-center gap-3 mb-5"><div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm"><i class="fas fa-snowflake text-blue-500 text-lg"></i></div><div><div class="text-xs font-bold text-blue-700 uppercase tracking-wider">Semester</div><div class="text-xl font-black text-primary">Genap (2)</div></div></div>
+                    <div class="space-y-3">
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.2</span><p class="text-sm text-gray-700">Mengetahui kualitas &amp; kredibilitas sumber informasi digital</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.3</span><p class="text-sm text-gray-700">Mengenal ekosistem media pers digital</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.5</span><p class="text-sm text-gray-700">Memahami pemanfaatan perangkat teknologi pengolah dokumen, lembar kerja, dan presentasi</p></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- ATP Section -->
-    <section id="atp" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Kurikulum Merdeka</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2 mb-4">Alur Tujuan Pembelajaran (ATP)</h2>
-                <div class="w-20 h-1 gradient-bg mx-auto rounded-full"></div>
-                <p class="text-gray-600 mt-4 max-w-3xl mx-auto">Mata Pelajaran Informatika — <strong>Fase D (SMP/MTs)</strong><br>ATP Kesepakatan MGMP Informatika Rayon 1 — Kabupaten Pelalawan<br>Tahun Ajaran <strong>2026/2027</strong></p>
+        <!-- Kelas 8 -->
+        <div id="content-8" class="kelas-pane hidden reveal">
+            <div class="rounded-2xl p-5 mb-8 flex items-center gap-4 border border-teal-100" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-md" style="background:linear-gradient(135deg,#0d9488,#06b6d4)">VIII</div>
+                <div><h3 class="text-lg font-bold text-primary">Kelas VIII &mdash; Fase D</h3><p class="text-sm text-gray-500">Penerapan berpikir komputasional &amp; pemahaman sistem komputer</p></div>
             </div>
-
-            <!-- Legend Elemen -->
-            <div class="flex flex-wrap justify-center gap-3 mb-6" data-aos="fade-up">
-                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
-                    <span class="w-3 h-3 rounded-full bg-blue-500"></span>
-                    <span class="text-sm font-medium text-gray-700">Berpikir Komputasional (BK)</span>
-                </div>
-                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
-                    <span class="w-3 h-3 rounded-full bg-purple-500"></span>
-                    <span class="text-sm font-medium text-gray-700">Literasi Digital (LD)</span>
-                </div>
-            </div>
-
-            <!-- Kelas Tabs -->
-            <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 bg-gray-100 p-2 rounded-2xl max-w-2xl mx-auto" data-aos="fade-up">
-                <button onclick="switchKelas('7')" id="tab-kelas-7" class="kelas-tab kelas-tab-active flex-1 min-w-[100px] px-4 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
-                    <i class="fas fa-graduation-cap"></i> Kelas VII
-                </button>
-                <button onclick="switchKelas('8')" id="tab-kelas-8" class="kelas-tab flex-1 min-w-[100px] px-4 py-3 rounded-xl font-bold text-sm text-gray-600 hover:bg-white/50 transition-all flex items-center justify-center gap-2">
-                    <i class="fas fa-graduation-cap"></i> Kelas VIII
-                </button>
-                <button onclick="switchKelas('9')" id="tab-kelas-9" class="kelas-tab flex-1 min-w-[100px] px-4 py-3 rounded-xl font-bold text-sm text-gray-600 hover:bg-white/50 transition-all flex items-center justify-center gap-2">
-                    <i class="fas fa-graduation-cap"></i> Kelas IX
-                </button>
-            </div>
-
-            <!-- Kelas 7 Content -->
-            <div id="content-kelas-7" class="kelas-content" data-aos="fade-up">
-                <div class="bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-6 mb-8 border border-blue-100">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-14 h-14 rounded-xl bg-blue-500 flex items-center justify-center text-white text-2xl font-bold shadow-md">VII</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-primary">Kelas VII — Fase D</h3>
-                            <p class="text-sm text-gray-600">Pengenalan konsep dasar Informatika</p>
-                        </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl p-6 border-l-4 border-amber-400 shadow-sm" style="background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+                    <div class="flex items-center gap-3 mb-5"><div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm"><i class="fas fa-sun text-amber-500 text-lg"></i></div><div><div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Semester</div><div class="text-xl font-black text-primary">Ganjil (1)</div></div></div>
+                    <div class="space-y-3">
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-bk flex-shrink-0 flex items-center justify-center font-bold text-xs">1.3</span><p class="text-sm text-gray-700">Menerapkan berpikir komputasional dalam menyelesaikan persoalan yang mengandung himpunan data berstruktur sederhana dengan volume kecil</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-bk flex-shrink-0 flex items-center justify-center font-bold text-xs">1.5</span><p class="text-sm text-gray-700">Menuliskan sekumpulan instruksi dengan menggunakan sekumpulan kosakata terbatas atau simbol dalam format pseudocode</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.6</span><p class="text-sm text-gray-700">Mendeskripsikan komponen, fungsi, dan cara kerja komputer</p></div>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Semester 1 -->
-                    <div class="semester-card-1 rounded-2xl p-6 shadow-md">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-sun text-amber-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Semester</div>
-                                <div class="text-2xl font-bold text-primary">Ganjil (1)</div>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-bk flex items-center justify-center font-bold text-xs">1.1</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami konsep himpunan data terstruktur dalam kehidupan sehari-hari</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-bk flex items-center justify-center font-bold text-xs">1.2</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami konsep lembar kerja pengolah data</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.1</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami cara kerja dan penggunaan mesin pencari di internet</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.4</span>
-                                <p class="text-sm text-gray-700 flex-1">Membedakan fakta, opini, dan hoaks</p>
-                            </div>
-                        </div>
+                <div class="rounded-2xl p-6 border-l-4 border-blue-400 shadow-sm" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+                    <div class="flex items-center gap-3 mb-5"><div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm"><i class="fas fa-snowflake text-blue-500 text-lg"></i></div><div><div class="text-xs font-bold text-blue-700 uppercase tracking-wider">Semester</div><div class="text-xl font-black text-primary">Genap (2)</div></div></div>
+                    <div class="space-y-3">
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.7</span><p class="text-sm text-gray-700">Memahami konsep dan penerapan konektivitas jaringan lokal dan internet baik kabel maupun nirkabel</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.12</span><p class="text-sm text-gray-700">Memahami dampak perundungan digital</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.10</span><p class="text-sm text-gray-700">Memahami pentingnya menjaga rekam jejak digital</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.11</span><p class="text-sm text-gray-700">Menerapkan toleransi &amp; empati di dunia digital</p></div>
                     </div>
-                    <!-- Semester 2 -->
-                    <div class="semester-card-2 rounded-2xl p-6 shadow-md">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-snowflake text-blue-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-blue-700 uppercase tracking-wider">Semester</div>
-                                <div class="text-2xl font-bold text-primary">Genap (2)</div>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.2</span>
-                                <p class="text-sm text-gray-700 flex-1">Mengetahui kualitas & kredibilitas sumber informasi digital</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.3</span>
-                                <p class="text-sm text-gray-700 flex-1">Mengenal ekosistem media pers digital</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.5</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami pemanfaatan perangkat teknologi pengolah dokumen, lembar kerja, dan presentasi</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kelas 8 Content -->
-            <div id="content-kelas-8" class="kelas-content hidden" data-aos="fade-up">
-                <div class="bg-gradient-to-r from-teal-50 to-green-50 rounded-2xl p-6 mb-8 border border-teal-100">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-14 h-14 rounded-xl bg-teal-500 flex items-center justify-center text-white text-2xl font-bold shadow-md">VIII</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-primary">Kelas VIII — Fase D</h3>
-                            <p class="text-sm text-gray-600">Penerapan berpikir komputasional & pemahaman sistem komputer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Semester 1 -->
-                    <div class="semester-card-1 rounded-2xl p-6 shadow-md">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-sun text-amber-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Semester</div>
-                                <div class="text-2xl font-bold text-primary">Ganjil (1)</div>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-bk flex items-center justify-center font-bold text-xs">1.3</span>
-                                <p class="text-sm text-gray-700 flex-1">Menerapkan berpikir komputasional dalam menyelesaikan persoalan yang mengandung himpunan data berstruktur sederhana dengan volume kecil</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-bk flex items-center justify-center font-bold text-xs">1.5</span>
-                                <p class="text-sm text-gray-700 flex-1">Menuliskan sekumpulan instruksi dengan menggunakan sekumpulan kosakata terbatas atau simbol dalam format pseudocode</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.6</span>
-                                <p class="text-sm text-gray-700 flex-1">Mendeskripsikan komponen, fungsi, dan cara kerja komputer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Semester 2 -->
-                    <div class="semester-card-2 rounded-2xl p-6 shadow-md">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-snowflake text-blue-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-blue-700 uppercase tracking-wider">Semester</div>
-                                <div class="text-2xl font-bold text-primary">Genap (2)</div>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.7</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami konsep dan penerapan konektivitas jaringan lokal dan internet baik kabel maupun nirkabel</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.12</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami dampak perundungan digital</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.10</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami pentingnya menjaga rekam jejak digital</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.11</span>
-                                <p class="text-sm text-gray-700 flex-1">Menerapkan toleransi & empati di dunia digital</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kelas 9 Content -->
-            <div id="content-kelas-9" class="kelas-content hidden" data-aos="fade-up">
-                <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 mb-8 border border-amber-100">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-14 h-14 rounded-xl bg-amber-500 flex items-center justify-center text-white text-2xl font-bold shadow-md">IX</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-primary">Kelas IX — Fase D</h3>
-                            <p class="text-sm text-gray-600">Penguatan kompetensi & keamanan dunia digital</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Semester 1 -->
-                    <div class="semester-card-1 rounded-2xl p-6 shadow-md">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-sun text-amber-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Semester</div>
-                                <div class="text-2xl font-bold text-primary">Ganjil (1)</div>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-bk flex items-center justify-center font-bold text-xs">1.4</span>
-                                <p class="text-sm text-gray-700 flex-1">Menerapkan berpikir komputasional untuk problem dalam kehidupan sehari-hari maupun dalam menghadapi masalah komputasi</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.9</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami pemanfaatan teknologi digital untuk produksi & diseminasi konten</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.8</span>
-                                <p class="text-sm text-gray-700 flex-1">Mengetahui jenis ruang publik virtual</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.17</span>
-                                <p class="text-sm text-gray-700 flex-1">Memiliki kesadaran penuh (mindfulness) dalam dunia digital</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Semester 2 -->
-                    <div class="semester-card-2 rounded-2xl p-6 shadow-md">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-snowflake text-blue-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-blue-700 uppercase tracking-wider">Semester</div>
-                                <div class="text-2xl font-bold text-primary">Genap (2)</div>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.16</span>
-                                <p class="text-sm text-gray-700 flex-1">Melindungi data pribadi & identitas digital</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.13</span>
-                                <p class="text-sm text-gray-700 flex-1">Membuat kata sandi yang aman</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.15</span>
-                                <p class="text-sm text-gray-700 flex-1">Memilah informasi privat & publik</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-sm flex items-start gap-3 hover:shadow-md transition">
-                                <span class="flex-shrink-0 w-10 h-10 rounded-lg badge-ld flex items-center justify-center font-bold text-xs">2.14</span>
-                                <p class="text-sm text-gray-700 flex-1">Memahami pengamanan perangkat dari berbagai jenis malware</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Capaian Pembelajaran Summary -->
-            <div class="mt-12 grid md:grid-cols-2 gap-6" data-aos="fade-up">
-                <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-6 border border-blue-100">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center text-white text-xl flex-shrink-0 shadow-md">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-primary mb-2">Elemen: Berpikir Komputasional</h3>
-                            <p class="text-sm text-gray-700 leading-relaxed">Penerapan berpikir komputasional, pemahaman himpunan data terstruktur, lembar kerja pengolah data, hingga penulisan instruksi dalam format pseudocode.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center text-white text-xl flex-shrink-0 shadow-md">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-primary mb-2">Elemen: Literasi Digital</h3>
-                            <p class="text-sm text-gray-700 leading-relaxed">Pemahaman mesin pencari, kredibilitas informasi, komponen komputer, konektivitas jaringan, etika digital, hingga keamanan data pribadi.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Download Button -->
-            <div class="text-center mt-12" data-aos="fade-up">
-                <div class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all cursor-pointer">
-                    <i class="fas fa-download"></i>
-                    <span>Unduh Dokumen ATP Lengkap (PDF)</span>
-                </div>
-                <p class="text-sm text-gray-500 mt-3">Disepakati bersama MGMP Informatika Rayon 1 — Kabupaten Pelalawan</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak Section -->
-    <section id="kontak" class="py-20 bg-gradient-to-br from-primary to-secondary text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="text-accent font-semibold text-sm uppercase tracking-wider">Hubungi Kami</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Mari Berkolaborasi</h2>
-                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-14 h-14 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-4">
-                        <i class="fas fa-map-marker-alt text-2xl text-accent"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Alamat</h3>
-                    <p class="text-white/70 text-sm">Dinas Pendidikan Kabupaten Pelalawan<br>Jl. Lintas Timur, Pangkalan Kerinci<br>Riau, Indonesia</p>
-                </div>
-                <div class="glass rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-4">
-                        <i class="fas fa-envelope text-2xl text-accent"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Email</h3>
-                    <p class="text-white/70 text-sm break-all">mgmp-ink-pelalawan<br>@smp.belajar.id</p>
-                </div>
-                <div class="glass rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-4">
-                        <i class="fab fa-whatsapp text-2xl text-accent"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">WhatsApp</h3>
-                    <p class="text-white/70 text-sm">+62 812-XXXX-XXXX<br>(Sekretariat MGMP)</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div>
-                            <div class="font-bold">MGMP Informatika</div>
-                            <div class="text-xs text-gray-400">Rayon 1 - Kab. Pelalawan</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm">Wadah kolaborasi guru Informatika SMP/MTs se-Rayon 1 Kabupaten Pelalawan untuk meningkatkan mutu pembelajaran.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 text-accent">Tautan Cepat</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#beranda" class="hover:text-white transition">Beranda</a></li>
-                        <li><a href="#tentang" class="hover:text-white transition">Tentang</a></li>
-                        <li><a href="#struktur" class="hover:text-white transition">Struktur Organisasi</a></li>
-                        <li><a href="#atp" class="hover:text-white transition">ATP Fase D</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 text-accent">Sumber Referensi</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>Kurikulum Merdeka</li>
-                        <li>Panduan Mapel Informatika 2025</li>
-                        <li>Pusat Kurikulum & Pembelajaran</li>
-                        <li>Kemdikbudristek RI</li>
-                    </ul>
-                </div>
+        <!-- Kelas 9 -->
+        <div id="content-9" class="kelas-pane hidden reveal">
+            <div class="rounded-2xl p-5 mb-8 flex items-center gap-4 border border-amber-100" style="background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-md" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">IX</div>
+                <div><h3 class="text-lg font-bold text-primary">Kelas IX &mdash; Fase D</h3><p class="text-sm text-gray-500">Penguatan kompetensi &amp; keamanan dunia digital</p></div>
             </div>
-            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-gray-400">&copy; 2026 MGMP Informatika Rayon 1 - Kabupaten Pelalawan. Hak Cipta Dilindungi.</p>
-                <div class="flex gap-3">
-                    <a href="#" class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition"><i class="fab fa-github"></i></a>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl p-6 border-l-4 border-amber-400 shadow-sm" style="background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+                    <div class="flex items-center gap-3 mb-5"><div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm"><i class="fas fa-sun text-amber-500 text-lg"></i></div><div><div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Semester</div><div class="text-xl font-black text-primary">Ganjil (1)</div></div></div>
+                    <div class="space-y-3">
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-bk flex-shrink-0 flex items-center justify-center font-bold text-xs">1.4</span><p class="text-sm text-gray-700">Menerapkan berpikir komputasional untuk problem dalam kehidupan sehari-hari maupun dalam menghadapi masalah komputasi</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.9</span><p class="text-sm text-gray-700">Memahami pemanfaatan teknologi digital untuk produksi &amp; diseminasi konten</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.8</span><p class="text-sm text-gray-700">Mengetahui jenis ruang publik virtual</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.17</span><p class="text-sm text-gray-700">Memiliki kesadaran penuh (mindfulness) dalam dunia digital</p></div>
+                    </div>
+                </div>
+                <div class="rounded-2xl p-6 border-l-4 border-blue-400 shadow-sm" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+                    <div class="flex items-center gap-3 mb-5"><div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm"><i class="fas fa-snowflake text-blue-500 text-lg"></i></div><div><div class="text-xs font-bold text-blue-700 uppercase tracking-wider">Semester</div><div class="text-xl font-black text-primary">Genap (2)</div></div></div>
+                    <div class="space-y-3">
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.16</span><p class="text-sm text-gray-700">Melindungi data pribadi &amp; identitas digital</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.13</span><p class="text-sm text-gray-700">Membuat kata sandi yang aman</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.15</span><p class="text-sm text-gray-700">Memilah informasi privat &amp; publik</p></div>
+                        <div class="tp-item"><span class="w-10 h-10 rounded-xl badge-ld flex-shrink-0 flex items-center justify-center font-bold text-xs">2.14</span><p class="text-sm text-gray-700">Memahami pengamanan perangkat dari berbagai jenis malware</p></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <!-- Back to Top -->
-    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full gradient-bg text-white shadow-lg hidden hover:scale-110 transition-all z-40">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <!-- Elemen & CP Accordion -->
+        <div class="mt-16 space-y-4 reveal">
+            <h3 class="text-2xl font-black text-primary text-center mb-6">Elemen &amp; Capaian Pembelajaran Fase D</h3>
+            <div class="rounded-2xl border border-blue-100 overflow-hidden shadow-sm">
+                <div class="flex items-center justify-between p-5 bg-blue-50 hover:bg-blue-100 transition cursor-pointer" onclick="toggleAcc(this)">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-brain text-sm"></i></div>
+                        <div><div class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-0.5">Elemen</div><div class="font-bold text-primary">Berpikir Komputasional (BK)</div></div>
+                    </div>
+                    <i class="fas fa-chevron-down acc-arrow text-blue-500"></i>
+                </div>
+                <div class="acc-body">
+                    <div class="p-5 border-t border-blue-100 space-y-4">
+                        <div><span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Deskripsi Elemen</span><p class="text-sm text-gray-600 leading-relaxed text-justify">Kemampuan untuk menyelesaikan masalah secara sistematis dan berjenjang melalui pemodelan dan melalui simulasi untuk menghasilkan solusi efektif, efisien, dan optimal yang dapat dijalankan oleh manusia atau mesin meliputi penalaran logis, kritis, dan kreatif berdasarkan data, baik secara mandiri maupun berkolaborasi.</p></div>
+                        <div><span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Capaian Pembelajaran Fase D</span><p class="text-sm text-gray-600 leading-relaxed text-justify">Murid mampu menerapkan berpikir komputasional untuk problem dalam kehidupan sehari-hari maupun dalam menghadapi masalah komputasi; memahami konsep himpunan data terstruktur dalam kehidupan sehari-hari; memahami konsep lembar kerja pengolah data; menerapkan berpikir komputasional dalam menyelesaikan persoalan yang mengandung himpunan data berstruktur sederhana dengan volume kecil; serta menuliskan sekumpulan instruksi dengan menggunakan sekumpulan kosakata terbatas atau simbol dalam format pseudocode.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-2xl border border-purple-100 overflow-hidden shadow-sm">
+                <div class="flex items-center justify-between p-5 bg-purple-50 hover:bg-purple-100 transition cursor-pointer" onclick="toggleAcc(this)">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500 flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-laptop text-sm"></i></div>
+                        <div><div class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-0.5">Elemen</div><div class="font-bold text-primary">Literasi Digital (LD)</div></div>
+                    </div>
+                    <i class="fas fa-chevron-down acc-arrow text-purple-500"></i>
+                </div>
+                <div class="acc-body">
+                    <div class="p-5 border-t border-purple-100 space-y-4">
+                        <div><span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-2">Deskripsi Elemen</span><p class="text-sm text-gray-600 leading-relaxed text-justify">Kecakapan bermedia digital, berperilaku etis dan berbudaya di dunia digital, berkemampuan menjaga keamanan diri dan lingkungan, serta memiliki kenyamanan dan keseimbangan hidup di dunia nyata sekaligus dunia maya.</p></div>
+                        <div><span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-2">Capaian Pembelajaran Fase D</span><p class="text-sm text-gray-600 leading-relaxed text-justify">Murid mampu memahami cara kerja dan penggunaan mesin pencari di internet; mengetahui kualitas informasi dan kredibilitas sumber informasi digital; mengenal ekosistem media pers digital; membedakan fakta, opini, dan hoaks; memahami pemanfaatan perangkat teknologi pengolah dokumen, lembar kerja, dan presentasi; mampu mendeskripsikan komponen, fungsi, dan cara kerja komputer; memahami konsep dan penerapan konektivitas jaringan lokal dan internet baik kabel maupun nirkabel; mengetahui jenis ruang publik virtual; memahami pemanfaatan perangkat teknologi digital untuk produksi dan diseminasi konten; memahami pentingnya menjaga rekam jejak digital, mengamalkan toleransi dan empati di dunia digital, memahami dampak perundungan digital, membuat kata sandi yang aman; memahami pengamanan perangkat dari berbagai jenis malware, memilah informasi yang bersifat privat dan publik, melindungi data pribadi dan identitas digital serta memiliki kesadaran penuh (mindfulness) dalam dunia digital.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+        <div class="text-center mt-12 reveal">
+            <button class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm text-white grad-primary shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                <i class="fas fa-download"></i> Unduh Dokumen ATP Lengkap (PDF)
+            </button>
+            <p class="text-xs text-gray-400 mt-3">Disepakati bersama MGMP Informatika Rayon 1 &mdash; Kabupaten Pelalawan</p>
+        </div>
+    </div>
+</section>
 
-        // Mobile menu
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        mobileMenu.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
+<!-- KONTAK -->
+<section id="kontak" class="py-24 hero-bg relative overflow-hidden">
+    <div class="absolute inset-0 hero-grid opacity-20"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-dark text-xs font-bold mb-5 uppercase tracking-widest" style="color:rgba(255,255,255,.8)"><i class="fas fa-paper-plane"></i> Hubungi Kami</div>
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-3">Mari Berkolaborasi</h2>
+            <div class="w-16 h-1 grad-accent mx-auto rounded-full"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 reveal">
+            <div class="glass-dark rounded-3xl p-7 text-center card-glow shine">
+                <div class="w-14 h-14 mx-auto rounded-2xl grad-accent flex items-center justify-center mb-5 shadow-lg"><i class="fas fa-map-marker-alt text-xl" style="color:#060f1e"></i></div>
+                <h3 class="font-bold text-white mb-2">Alamat</h3>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.5)">Dinas Pendidikan Kabupaten Pelalawan<br>Jl. Lintas Timur, Pangkalan Kerinci<br>Riau, Indonesia</p>
+            </div>
+            <div class="glass-dark rounded-3xl p-7 text-center card-glow shine">
+                <div class="w-14 h-14 mx-auto rounded-2xl grad-cyan flex items-center justify-center mb-5 shadow-lg"><i class="fas fa-envelope text-xl text-white"></i></div>
+                <h3 class="font-bold text-white mb-2">Email</h3>
+                <p class="text-sm" style="color:rgba(255,255,255,.5)">mgmp-ink-pelalawan<br>@smp.belajar.id</p>
+            </div>
+            <div class="glass-dark rounded-3xl p-7 text-center card-glow shine">
+                <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-5 shadow-lg" style="background:linear-gradient(135deg,#25d366,#128c7e)"><i class="fab fa-whatsapp text-xl text-white"></i></div>
+                <h3 class="font-bold text-white mb-2">WhatsApp</h3>
+                <p class="text-sm" style="color:rgba(255,255,255,.5)">+62 812-XXXX-XXXX<br>(Sekretariat MGMP)</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-md');
-            } else {
-                navbar.classList.remove('shadow-md');
-            }
-        });
+<!-- FOOTER -->
+<footer class="py-14" style="background:#060f1e">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-10 mb-10">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl grad-primary flex items-center justify-center text-white shadow-md"><i class="fas fa-laptop-code"></i></div>
+                    <div><div class="font-bold text-sm text-white">MGMP Informatika</div><div class="text-xs text-gray-500">Rayon 1 &mdash; Kab. Pelalawan</div></div>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">Wadah kolaborasi guru Informatika SMP/MTs se-Rayon 1 Kabupaten Pelalawan untuk meningkatkan mutu pembelajaran.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm text-accent mb-5">Tautan Cepat</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#beranda"  class="footer-link">Beranda</a></li>
+                    <li><a href="#tentang"  class="footer-link">Tentang</a></li>
+                    <li><a href="#struktur" class="footer-link">Struktur Organisasi</a></li>
+                    <li><a href="#atp"      class="footer-link">ATP Fase D</a></li>
+                    <li><a href="#kontak"   class="footer-link">Kontak</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm text-accent mb-5">Sumber Referensi</h4>
+                <ul class="space-y-2.5 text-sm text-gray-500">
+                    <li>Kurikulum Merdeka</li>
+                    <li>Panduan Mapel Informatika 2025</li>
+                    <li>Pusat Kurikulum &amp; Pembelajaran</li>
+                    <li>Kemdikbudristek RI</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t pt-7 flex flex-col md:flex-row justify-between items-center gap-4" style="border-color:#1f2937">
+            <p class="text-xs text-gray-600">&copy; 2026 MGMP Informatika Rayon 1 &mdash; Kabupaten Pelalawan. Hak Cipta Dilindungi.</p>
+            <div class="flex gap-3">
+                <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-gray-500 hover:bg-secondary hover:text-white transition text-sm" style="background:#111827"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-gray-500 hover:bg-secondary hover:text-white transition text-sm" style="background:#111827"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-gray-500 hover:bg-secondary hover:text-white transition text-sm" style="background:#111827"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-gray-500 hover:bg-secondary hover:text-white transition text-sm" style="background:#111827"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
 
-        // Back to top
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                backToTop.classList.remove('hidden');
-            } else {
-                backToTop.classList.add('hidden');
-            }
-        });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Kembali ke atas">
+    <i class="fas fa-arrow-up text-sm"></i>
+</button>
 
-        // Kelas tab switching
-        function switchKelas(kelas) {
-            document.querySelectorAll('.kelas-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.kelas-tab').forEach(btn => {
-                btn.classList.remove('kelas-tab-active');
-                btn.classList.add('text-gray-600');
-            });
-            document.getElementById('content-kelas-' + kelas).classList.remove('hidden');
-            const activeTab = document.getElementById('tab-kelas-' + kelas);
-            activeTab.classList.add('kelas-tab-active');
-            activeTab.classList.remove('text-gray-600');
-        }
-    </script>
+<script>
+(function(){
+    const wrap = document.getElementById('particles');
+    const colors=['rgba(13,148,136,.6)','rgba(6,182,212,.5)','rgba(245,158,11,.4)','rgba(255,255,255,.25)'];
+    for(let i=0;i<28;i++){
+        const p=document.createElement('div'),size=Math.random()*5+3;
+        p.className='particle';
+        p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;
+        wrap.appendChild(p);
+    }
+})();
+
+const navbar=document.getElementById('navbar'),brandT=document.getElementById('brand-title'),brandS=document.getElementById('brand-sub'),btt=document.getElementById('btt'),navItems=document.querySelectorAll('.nav-item');
+window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    if(y>60){navbar.classList.add('scrolled');brandT.style.color='#0f2942';brandS.style.color='#6b7280';navItems.forEach(n=>n.style.color='#374151');}
+    else{navbar.classList.remove('scrolled');brandT.style.color='#fff';brandS.style.color='rgba(255,255,255,.6)';navItems.forEach(n=>n.style.color='#fff');}
+    btt.classList.toggle('show',y>400);
+});
+
+const mobBtn=document.getElementById('mobBtn'),mobMenu=document.getElementById('mobMenu');
+mobBtn.addEventListener('click',()=>mobMenu.classList.toggle('hidden'));
+mobMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobMenu.classList.add('hidden')));
+
+const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+function switchKelas(k){
+    document.querySelectorAll('.kelas-pane').forEach(p=>p.classList.add('hidden'));
+    document.querySelectorAll('.atp-tab').forEach(b=>b.classList.remove('active'));
+    document.getElementById('content-'+k).classList.remove('hidden');
+    document.getElementById('tab-'+k).classList.add('active');
+}
+
+function toggleAcc(header){
+    const body=header.nextElementSibling,isOpen=body.classList.contains('open');
+    header.classList.toggle('acc-open',!isOpen);
+    body.classList.toggle('open',!isOpen);
+}
+</script>
 </body>
 </html>
